@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('fish', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->name();
+            $table->color();
+            $table->type_id();
         });
     }
 
