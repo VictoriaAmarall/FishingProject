@@ -7,59 +7,45 @@ use Illuminate\Http\Request;
 
 class TypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $types = Type::all();
+        return view('type.index', compact('types'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create() // retorna view com formulário
     {
-        //
+        return view('type.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(Request $request) // armazena o tipo no banco
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        Type::create($data);
+        return redirect('/type');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Type $type)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Type $type)
     {
-        //
+        return view('type.edit', compact('type'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Type $type)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $type->update($data);
+        return redirect('/type');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Type $type)
+    public function destroy(Type $type) // apaga o tipo
     {
-        //
+        $type->delete();
+        return redirect('/type');
     }
 }
