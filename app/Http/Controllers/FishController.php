@@ -7,59 +7,27 @@ use Illuminate\Http\Request;
 
 class FishController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function create(){//retorna view com formulario
+        return view('fish.create');
+    }
+    public function store(Request $request){//armazena o fisho insere no banco de dados
+        fish::create($request->all());
+        return redirect ("/fish");
+    }
+    public function index(){
+        $fishes = Fish::all();
+        return view('fish.index', compact('fishes'));
+    }
+    public function edit(fish $fish){
+        return view('fish.edit', compact('fish'));
+    } 
+    public function update(fish $fish, Request $request){
+        $fish->update($request->all());
+        return redirect("/fish");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Fish $fish)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Fish $fish)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Fish $fish)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Fish $fish)
-    {
-        //
+    public function destroy (fish $fish){//para apagar fisho
+        $fish-> delete();
+        return redirect ('/fish');
     }
 }

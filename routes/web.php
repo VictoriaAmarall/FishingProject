@@ -8,13 +8,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get ('/fish', [fishController::class,'index']); //lista fish
-Route::get ('/fish/create', [fishController::class,'create']); //cria fish
-Route::post ('/fish', [fishController::class,'store']);// guarda os dados (store)
+Route::get ('/fish', [FishController::class,'index']); //lista fish
+Route::get ('/fish/create', [FishController::class,'create']); //cria fish
+Route::post ('/fish', [FishController::class,'store']);// guarda os dados (store)
 
 //edit
-Route::get ('/fish/edit/{fish}', [fishController::class,'edit']); //chama a função edit para editar fisho
-Route::post ('/fish/update/{fish}', [fishController::class,'update']);// guarda os dados (store) após atualizar
+Route::get ('/fish/edit/{fish}', [FishController::class,'edit']); //chama a função edit para editar fisho
+Route::post ('/fish/update/{fish}', [FishController::class,'update']);// guarda os dados (store) após atualizar
 
 //apagar
-Route::get ('/fish/destroy/{fish}', [fishController::class,'destroy']);
+Route::get ('/fish/destroy/{fish}', [FishController::class,'destroy']);
